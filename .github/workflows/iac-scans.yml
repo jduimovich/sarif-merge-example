@@ -32,10 +32,8 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
-          file: frontend/deploy/deployment.yaml    
-      - name: Combine Snyk Sarif Output
-        run: | 
-          bash snyk-rename   
+          file: frontend/deploy/deployment.yaml     
+      - uses: jduimovich/collect-sarif-files@main  
 
       - name: Run Snyk to check frontend service 
         continue-on-error: true
@@ -44,9 +42,7 @@ jobs:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
           file: frontend/deploy/service.yaml  
-      - name: Combine Snyk Sarif Output
-        run: | 
-          bash snyk-rename   
+      - uses: jduimovich/collect-sarif-files@main  
 
       - name: Run Snyk to check fib-go deployment
         continue-on-error: true
@@ -54,10 +50,8 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
-          file: services/fib-go/deploy/deployment.yaml    
-      - name: Combine Snyk Sarif Output
-        run: | 
-          bash snyk-rename   
+          file: services/fib-go/deploy/deployment.yaml  
+      - uses: jduimovich/collect-sarif-files@main  
 
       - name: Run Snyk to check fib-node deployment
         continue-on-error: true
@@ -65,10 +59,8 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
-          file: services/fib-node/deploy/deployment.yaml    
-      - name: Combine Snyk Sarif Output
-        run: | 
-          bash snyk-rename   
+          file: services/fib-node/deploy/deployment.yaml 
+      - uses: jduimovich/collect-sarif-files@main   
 
       - name: Run Snyk to check fib-quarkus deployment
         continue-on-error: true
@@ -77,9 +69,7 @@ jobs:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
           file: services/fib-quarkus/deploy/deployment.yaml    
-      - name: Combine Snyk Sarif Output
-        run: | 
-          bash snyk-rename   
+      - uses: jduimovich/collect-sarif-files@main   
 
       - name: Save all sarif files
         run: |  
