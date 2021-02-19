@@ -25,7 +25,10 @@ jobs:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
           file: frontend/deploy/deployment.yaml     
-      - uses: jduimovich/collect-sarif-files@main  
+      - uses: jduimovich/collect-sarif-files@main 
+        with:
+          input-file-name: snyk.sarif
+          merged-file-name: merged.sarif
 
       - name: Run Snyk to check frontend service 
         continue-on-error: true
@@ -34,7 +37,10 @@ jobs:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
           file: frontend/deploy/service.yaml  
-      - uses: jduimovich/collect-sarif-files@main  
+      - uses: jduimovich/collect-sarif-files@main 
+        with:
+          input-file-name: snyk.sarif
+          merged-file-name: merged.sarif
 
       - name: Run Snyk to check fib-go deployment
         continue-on-error: true
@@ -43,7 +49,10 @@ jobs:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
           file: services/fib-go/deploy/deployment.yaml  
-      - uses: jduimovich/collect-sarif-files@main  
+      - uses: jduimovich/collect-sarif-files@main 
+        with:
+          input-file-name: snyk.sarif
+          merged-file-name: merged.sarif
 
       - name: Run Snyk to check fib-node deployment
         continue-on-error: true
@@ -52,7 +61,10 @@ jobs:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
           file: services/fib-node/deploy/deployment.yaml 
-      - uses: jduimovich/collect-sarif-files@main   
+      - uses: jduimovich/collect-sarif-files@main 
+        with:
+          input-file-name: snyk.sarif
+          merged-file-name: merged.sarif
 
       - name: Run Snyk to check fib-quarkus deployment
         continue-on-error: true
@@ -61,8 +73,11 @@ jobs:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
           file: services/fib-quarkus/deploy/deployment.yaml    
-      - uses: jduimovich/collect-sarif-files@main   
-
+      - uses: jduimovich/collect-sarif-files@main 
+        with:
+          input-file-name: snyk.sarif
+          merged-file-name: merged.sarif
+          
       - name: Save all sarif files
         run: |  
           mkdir -p uploads
