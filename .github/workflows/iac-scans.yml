@@ -18,6 +18,30 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2 
 
+      - name: Run Snyk to check haproxy deployment
+        continue-on-error: true
+        uses: snyk/actions/iac@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          file: haproxy/deploy/deployment.yaml     
+      - uses: jduimovich/collect-sarif-files@main 
+        with:
+          input-file-name: snyk.sarif
+          merged-file-name: merged.sarif
+
+      - name: Run Snyk to check haproxy service 
+        continue-on-error: true
+        uses: snyk/actions/iac@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          file: haproxy/deploy/service.yaml  
+      - uses: jduimovich/collect-sarif-files@main 
+        with:
+          input-file-name: snyk.sarif
+          merged-file-name: merged.sarif 
+
       - name: Run Snyk to check frontend deployment
         continue-on-error: true
         uses: snyk/actions/iac@master
