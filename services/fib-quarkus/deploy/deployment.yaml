@@ -9,6 +9,8 @@ metadata:
     app.kubernetes.io/instance : fib-service-in-quarkus
     app.kubernetes.io/component : backend 
     app.openshift.io/runtime : quarkus 
+  annotations:  
+    container.apparmor.security.beta.kubernetes.io/fib-quarkus-deploy
 spec:
   replicas: 2
   selector:
