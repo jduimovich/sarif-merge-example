@@ -18,6 +18,8 @@ spec:
       labels:
         app: haproxy
     spec:
+      securityContext:
+        runAsNonRoot: true
       containers:
       - name: haproxy-deploy
         image: jduimovich/frontend-haproxy:latest

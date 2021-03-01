@@ -21,6 +21,8 @@ spec:
       labels:
         app: frontend
     spec:
+      securityContext:
+        runAsNonRoot: true
       containers:
       - name: frontend-deploy
         image: jduimovich/frontend:latest

@@ -21,6 +21,8 @@ spec:
       labels:
         app: fib
     spec:
+      securityContext:
+        runAsNonRoot: true
       containers:
       - name: fib-quarkus-deploy
         image: jduimovich/fib-quarkus:latest

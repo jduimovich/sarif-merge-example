@@ -21,6 +21,8 @@ spec:
       labels:
         app: fib
     spec:
+      securityContext:
+        runAsNonRoot: true
       containers:
       - name: fib-go-deploy
         image: jduimovich/fib-go:latest

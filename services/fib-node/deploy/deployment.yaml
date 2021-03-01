@@ -21,6 +21,8 @@ spec:
       labels:
         app: fib
     spec:
+      securityContext:
+        runAsNonRoot: true
       containers:
       - name: fib-node-deploy
         image: jduimovich/fib-node:latest
